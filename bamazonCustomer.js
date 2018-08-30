@@ -51,10 +51,10 @@ function displayProducts() {
     }
     ])
     .then(function(answer) {
-      var prodID = answer.productid;
+      var prodId = answer.productid;
       var prodAmount = answer.productamount;
 
-      connection.query("SELECT stock_quantity FROM products where item_id = " + prodID, function(err, res) {
+      connection.query("SELECT stock_quantity FROM products where item_id = " + prodId, function(err, res) {
           if (err) {console.log(err)}
             else {
               var stockQuantity = res[0].stock_quantity
@@ -84,4 +84,5 @@ function callback(prodId, newAmount) {
           }
         ]
       )
-    };
+    displayProducts();
+};
