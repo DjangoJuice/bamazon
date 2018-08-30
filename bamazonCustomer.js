@@ -16,17 +16,21 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId);
+  if (err) {console.log(err)}
+  else {
   displayProducts();
+  }
+  console.log("connected as id " + connection.threadId);
 });
 
 function displayProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
-      if (err) throw err;
+      if (err) {
+        console.log(err)
+      } else {
       for (var i = 0; i < res.length; i++) {
       console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " +
-        res[i].stock_quantity)}
+        res[i].stock_quantity)}}
         console.log("-----------------------------------");
       productid();
     });
@@ -49,66 +53,35 @@ function displayProducts() {
     .then(function(answer) {
       var prodID = answer.productid;
       var prodAmount = answer.productamount;
-      console.log("prodID ", prodID)
 
       connection.query("SELECT stock_quantity FROM products where item_id = " + prodID, function(err, res) {
           if (err) {console.log(err)}
-          else {
-              var stockQuantity = res[0].stock_quantity};
+            else {
+              var stockQuantity = res[0].stock_quantity
+            };
               console.log("stockQuantity ", stockQuantity)
               if (stockQuantity > prodAmount) {
-                  var newAmount = (stockQuantity - prodAmount)
-                  updateStock(newAmount);
+                var newAmount = (stockQuantity - prodAmount)
+                  updateStock(prodId, newAmount);
               } else {console.log("Not enough")}
-      });
-
-      function updateStock(newAmount) {
-        connection.query("UPDATE products SET ? WHERE ?",
-                          [
-                            {
-                              stock_quantity: newAmount
-                            },
-                            {
-                              item_id: prodID
-                            }
-                          ])
+            })
+          })
         };
-        displayProducts();
-        //connection.end();
-    }) }// End of function Productid()
 
-    
+function updateStock(prodId, newAmount) {
+  return callback(prodId, newAmount);
+};
 
-//     function quantityAmount(prodID) {
-//   inquirer
-//   .prompt([
-//       {
-//         type: "input",
-//         message: "How many of those products do you want?",
-//         name: "productamount"
-//     }
-//     ])
-//     .then(function(answer1) {
-//         var prodID = answer1.productid; 
-//         var productOrdered = answer1.productamount;
-        
-//         var productAvailable = connection.query("SELECT stock_quantity FROM products where id = " + userChoice, function(err, res) {
-//             console.log(res);
-//         if (productOrdered > res) {
-//             console.log("not enough!")
-//         } else {
-//             var newStockQuantity = (productAvailable - productOrdered);
-//             connection.query("UPDATE products SET ? WHERE ?",
-//                   [
-//                     {
-//                       stock_quantity: newStockQuantity
-//                     },
-//                     {
-//                       item_id: userChoice
-//                     }
-//                   ])
-//         }
-//         })
-
-//       });
-//     }}
+function callback(prodId, newAmount) {
+    connection.query(
+      "UPDATE products SET ? WHERE ?",
+        [
+          {
+            stock_quantity: newAmount
+          },
+          {
+            item_id: prodId
+          }
+        ]
+      )
+    };
