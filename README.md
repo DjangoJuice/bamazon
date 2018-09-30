@@ -1,5 +1,5 @@
 # bamazon - Commerce and Inventory Application
-`###`Demonstrating Node.JS + MySQL
+### Demonstrating Node.JS + MySQL
 
 Customer/Vendor driven to allow for a Sales Transaction
 
