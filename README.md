@@ -1,4 +1,5 @@
 # bamazon - Commerce and Inventory Application
+`###`Demonstrating Node.JS + MySQL
 
 Customer/Vendor driven to allow for a Sales Transaction
 
@@ -16,6 +17,8 @@ Then they're prompted for the amount they wish to purchase
 
 ![Screenshot4](/imgs/CropperCapture[4].png)
 
-Once they input the amount and hit Enter, the inventory should update the customer is reprompted in case they are still shopping
+Once they input the amount and hit Enter, the inventory should update the customer is reprompted in case they are still shopping.
 
 ![Screenshot5](/imgs/CropperCapture[5].png)
+
+Thanks for checking out!
