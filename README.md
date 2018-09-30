@@ -6,7 +6,7 @@ Customers are first presented with the catalog of inventory
 
 ![Screenshot1](/imgs/CropperCapture[1].png)
 
-...and asked to select the ID of their choice.
+...and asked for the ID that matches the desired product.
 
 ![Screenshot2](/imgs/CropperCapture[2].png)
 
