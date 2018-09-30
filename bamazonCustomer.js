@@ -68,11 +68,9 @@ function displayProducts() {
           })
         };
 
-function updateStock(prodId, newAmount) {
-  return callback(prodId, newAmount);
-};
 
-function callback(prodId, newAmount) {
+
+function updateStock(prodId, newAmount) {
     connection.query(
       "UPDATE products SET ? WHERE ?",
         [
@@ -83,6 +81,8 @@ function callback(prodId, newAmount) {
             item_id: prodId
           }
         ]
-      )
-    displayProducts();
+      , function(err, res){
+        displayProducts();
+
+      });
 };
